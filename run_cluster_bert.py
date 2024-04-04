@@ -19,8 +19,14 @@ import inspect
 import logging
 import os
 # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
-os.environ['http_proxy'] = 'http://hyan01:yanhang123@10.176.52.116:3333'
-os.environ['https_proxy'] = 'http://hyan01:yanhang123@10.176.52.116:3333'
+# os.environ['http_proxy'] = 'http://hyan01:yanhang123@10.176.52.116:3333'
+# os.environ['https_proxy'] = 'http://hyan01:yanhang123@10.176.52.116:3333'
+# import os
+os.environ['HF_DATASETS_OFFLINE'] = '1'
+os.environ['CURL_CA_BUNDLE'] = ''
+# os.environ['HTTP_PROXY'] = "http://127.0.0.1:7890"
+# os.environ['HTTPS_PROXY'] = "http://127.0.0.1:7890"
+# os.environ['ALL_PROXY'] = "socks5://127.0.0.1:7890"
 import random
 import sys
 import torch
@@ -57,7 +63,7 @@ task_to_keys = {
     "rte": ("sentence1", "sentence2"),
     "sst2": ("sentence", None),
     "stsb": ("sentence1", "sentence2"),
-    "wnli": ("sentence1", "sentence2"),
+    "wnli": ("sentence1", "sentence2")
 }
 
 logger = logging.getLogger(__name__)
@@ -280,11 +286,12 @@ def main():
         if training_args.do_predict:
             datasets = load_dataset(
                 "csv", data_files={"train": data_args.train_file, "validation": data_args.validation_file,
-                                   "test": data_args.test_file}, sep="\t"
+                                   "test": data_args.test_file}, column_names=["sentence1", "label"], sep=","
             )
         else:
             datasets = load_dataset(
-                "csv", data_files={"train": data_args.train_file, "validation": data_args.validation_file}, sep="\t"
+                "csv", data_files={"train": data_args.train_file, "validation": data_args.validation_file},
+                column_names=["Texts", "label"],sep=","
             )
     else:
         # Loading a dataset from local json files

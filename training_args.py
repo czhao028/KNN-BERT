@@ -19,7 +19,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any, Dict, List, Optional, Tuple
 
-from transformers.file_utils import cached_property, is_torch_available, is_torch_tpu_available, torch_required
+from transformers.file_utils import cached_property, is_torch_available, is_torch_tpu_available
 from transformers.trainer_utils import EvaluationStrategy
 from transformers.utils import logging
 
@@ -461,7 +461,6 @@ class TrainingArguments:
         return eval_batch_size
 
     @cached_property
-    @torch_required
     def _setup_devices(self) -> Tuple["torch.device", int]:
         logger.info("PyTorch: setting up devices")
         if self.no_cuda:
@@ -492,7 +491,6 @@ class TrainingArguments:
         return device, n_gpu
 
     @property
-    @torch_required
     def device(self) -> "torch.device":
         """
         The device used by this process.
@@ -500,7 +498,6 @@ class TrainingArguments:
         return self._setup_devices[0]
 
     @property
-    @torch_required
     def n_gpu(self):
         """
         The number of GPUs used by this process.
@@ -512,7 +509,6 @@ class TrainingArguments:
         return self._setup_devices[1]
 
     @property
-    @torch_required
     def parallel_mode(self):
         """
         The current mode used for parallelism if multiple GPUs/TPU cores are available. One of:

@@ -291,7 +291,7 @@ def main():
         else:
             datasets = load_dataset(
                 "csv", data_files={"train": data_args.train_file, "validation": data_args.validation_file},
-                column_names=["Texts", "label"],sep=","
+                column_names=["sentence1", "label"],sep=","
             )
     else:
         # Loading a dataset from local json files

@@ -306,7 +306,7 @@ class Trainer:
                 "You should subclass `Trainer` and override the `create_optimizer_and_scheduler` method."
             )
         callbacks = DEFAULT_CALLBACKS if callbacks is None else DEFAULT_CALLBACKS + callbacks
-        self.callback_handler = CallbackHandler(callbacks, self.model, self.optimizer, self.lr_scheduler)
+        self.callback_handler = CallbackHandler(callbacks, self.model, self.tokenizer, self.optimizer, self.lr_scheduler)
         self.add_callback(PrinterCallback if self.args.disable_tqdm else DEFAULT_PROGRESS_CALLBACK)
 
         # Will be set to True by `self._setup_loggers()` on first call to `self.log()`.
@@ -679,7 +679,7 @@ class Trainer:
         model.train()
         positive_sample = None
         negative_sample = None
-        if not self.args.memory_bank and self.args.load_model_pattern in ["knn_bert", "knn_roberta"]:
+        if self.args.load_model_pattern in ["knn_bert", "knn_roberta"]:
             positive_sample = self.generate_positive_sample(inputs["labels"])
             positive_sample = self._prepare_inputs(positive_sample)
 

@@ -7,6 +7,7 @@ Code for paper [KNN-BERT: Fine-Tuning Pre-Trained Models with KNN Classifier](ht
  `pip install -r requirements.txt`
  
  How to run the script after virtual environment is created: 
+ 
  `mkdir logs`
  
  `mkdir output`

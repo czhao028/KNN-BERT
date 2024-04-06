@@ -18,12 +18,12 @@ import dataclasses
 import inspect
 import logging
 import os
-# os.environ['CUDA_VISIBLE_DEVICES'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 # os.environ['http_proxy'] = 'http://hyan01:yanhang123@10.176.52.116:3333'
 # os.environ['https_proxy'] = 'http://hyan01:yanhang123@10.176.52.116:3333'
 # import os
-os.environ['HF_DATASETS_OFFLINE'] = '1'
-os.environ['CURL_CA_BUNDLE'] = ''
+# os.environ['HF_DATASETS_OFFLINE'] = '1'
+# os.environ['CURL_CA_BUNDLE'] = ''
 # os.environ['HTTP_PROXY'] = "http://127.0.0.1:7890"
 # os.environ['HTTPS_PROXY'] = "http://127.0.0.1:7890"
 # os.environ['ALL_PROXY'] = "socks5://127.0.0.1:7890"
